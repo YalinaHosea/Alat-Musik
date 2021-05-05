@@ -1,3 +1,4 @@
+import 'package:alatmusik/models/Bindings_Category.dart';
 import 'package:alatmusik/models/Category.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
@@ -44,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: MainDrawer(),
         ),
         body: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
+            padding: EdgeInsets.only(left: 20, right: 20, top: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -85,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 10),
                 FutureBuilder(
                   future: apiRepository.getListkategori,
-                  builder: (context, snapshot) {
+                  builder: (context, AsyncSnapshot<List<Bindings>> snapshot) {
                     if (snapshot.data == null) {
                       return (Container(
                         child: Center(
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisSpacing: 20,
                             mainAxisSpacing: 20,
                             itemBuilder: (context, index) {
-                              Category cat = snapshot.data[index];
+                              Bindings bin = snapshot.data[index];
                               return Stack(
                                 children: <Widget>[
                                   ClipRRect(
@@ -120,54 +121,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                             0, 30, rect.width, rect.height));
                                       },
                                       blendMode: BlendMode.darken,
-                                      child: CachedNetworkImage(
-                                        imageUrl: url_category + cat.value,
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          padding: EdgeInsets.all(15),
-                                          height: index.isEven ? 200 : 240,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                        placeholder: (context, url) =>
-                                            Container(
-                                          child: Center(
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  new AlwaysStoppedAnimation<
-                                                      Color>(kBlueColor),
-                                            ),
-                                          ),
-                                          padding: EdgeInsets.all(15),
-                                          height: index.isEven ? 200 : 240,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(8.0),
-                                            ),
-                                          ),
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            Container(
-                                          child: Center(
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  new AlwaysStoppedAnimation<
-                                                      Color>(kBlueColor),
-                                            ),
-                                          ),
-                                          padding: EdgeInsets.all(15),
-                                          height: index.isEven ? 200 : 240,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(8.0),
-                                            ),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height:
+                                            MediaQuery.of(context).size.height,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFF5F4EF),
+                                          image: DecorationImage(
+                                            colorFilter: new ColorFilter.mode(
+                                                Colors.black.withOpacity(0.4),
+                                                BlendMode.darken),
+                                            image: AssetImage(
+                                                "assets/images/gesek.jpg" +
+                                                    bin.image.value),
+                                            fit: BoxFit.cover,
+                                            alignment: Alignment.topCenter,
                                           ),
                                         ),
                                       ),
@@ -182,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          cat.type,
+                                          bin.category.value,
                                           style: kTitleTextStyle.copyWith(
                                               color: Colors.white),
                                         ),

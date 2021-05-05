@@ -8,7 +8,7 @@ class MainDrawer extends StatelessWidget {
     return Column(children: [
       Container(
         child: Padding(
-          padding: EdgeInsets.only(top: 50.0),
+          padding: EdgeInsets.only(top: 20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
