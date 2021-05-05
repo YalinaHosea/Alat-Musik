@@ -1,10 +1,10 @@
-class Category {
+class Description {
   String type;
   String value;
 
-  Category({this.type, this.value});
+  Description({this.type, this.value});
 
-  Category.fromJson(Map<String, dynamic> json) {
+  Description.fromJson(Map<String, dynamic> json) {
     type = json['type'];
     value = json['value'];
   }

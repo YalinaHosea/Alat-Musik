@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -80,7 +79,7 @@ main() async {
   headers['Accept'] = 'application/json';
 
   var response = await http.post(
-      'https://app.alunalun.info/fuseki/planet/query',
+      'https://app.alunalun.info/fuseki/planet/alatmusik',
       headers: headers,
       body: "query=${payload}");
 

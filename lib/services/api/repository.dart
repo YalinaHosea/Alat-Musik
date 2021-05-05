@@ -1,5 +1,7 @@
+import 'package:alatmusik/models/Bindings_Category.dart';
 import 'package:alatmusik/services/api/provider.dart';
 import 'package:alatmusik/services/constants/constants.dart';
+import 'package:dio/dio.dart';
 
 class ApiRepository {
   String base = base_url;
@@ -9,8 +11,5 @@ class ApiRepository {
   ApiRepository() {
     provider = ApiProvider(base, dio);
   }
-  Future<List<Category>> get getListkategory => provider.getCategory();
-  Future<List<Topik>> getListTopik(String id_kategori) =>
-      provider.getTopik(id_kategori);
-  Future<List<Materi>> getListSubTopik(int id_topik) =>
-      provider.getSubTopik(id_topik);
+  Future<List<Bindings>> get getListkategori => provider.getKategori();
+}
