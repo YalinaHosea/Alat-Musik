@@ -1,4 +1,5 @@
 import 'package:alatmusik/models/Bindings_Category.dart';
+import 'package:alatmusik/models/Kategori.dart';
 import 'package:alatmusik/services/constants/constants.dart';
 import 'package:dio/dio.dart';
 
@@ -13,12 +14,13 @@ class ApiProvider {
       ..options.receiveTimeout = 10000;
   }
 
-  Future<List<Bindings>> getKategori() async {
+  Future<List<Bindings_Category>> getKategori() async {
     Response response = await dio.get(url_category);
-    List<Bindings> bind = [];
+    List<Bindings_Category> bind = [];
     if (response.statusCode == 200) {
+      Kategori kat = response.data;
       for (var item in response.data["results"]["bindings"]) {
-        Bindings bin = Bindings.fromJson(item);
+        Bindings_Category bin = Bindings_Category.fromJson(item);
         bind.add(bin);
       }
       return bind;

@@ -1,15 +1,15 @@
 import 'package:alatmusik/models/Bindings_Category.dart';
 
 class Results {
-  List<Bindings> bindings;
+  List<Bindings_Category> bindings;
 
   Results({this.bindings});
 
   Results.fromJson(Map<String, dynamic> json) {
     if (json['bindings'] != null) {
-      bindings = new List<Bindings>();
+      bindings = new List<Bindings_Category>();
       json['bindings'].forEach((v) {
-        bindings.add(new Bindings.fromJson(v));
+        bindings.add(new Bindings_Category.fromJson(v));
       });
     }
   }

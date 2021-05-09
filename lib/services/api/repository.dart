@@ -11,5 +11,5 @@ class ApiRepository {
   ApiRepository() {
     provider = ApiProvider(base, dio);
   }
-  Future<List<Bindings>> get getListkategori => provider.getKategori();
+  Future<List<Bindings_Category>> get getListkategori => provider.getKategori();
 }

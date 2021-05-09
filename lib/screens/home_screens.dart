@@ -1,8 +1,6 @@
 import 'package:alatmusik/models/Bindings_Category.dart';
-import 'package:alatmusik/models/Category.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -86,7 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 10),
                 FutureBuilder(
                   future: apiRepository.getListkategori,
-                  builder: (context, AsyncSnapshot<List<Bindings>> snapshot) {
+                  builder: (context,
+                      AsyncSnapshot<List<Bindings_Category>> snapshot) {
                     if (snapshot.data == null) {
                       return (Container(
                         child: Center(
@@ -102,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisSpacing: 20,
                             mainAxisSpacing: 20,
                             itemBuilder: (context, index) {
-                              Bindings bin = snapshot.data[index];
+                              Bindings_Category bin = snapshot.data[index];
                               return Stack(
                                 children: <Widget>[
                                   ClipRRect(

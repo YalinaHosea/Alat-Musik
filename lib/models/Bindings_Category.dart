@@ -1,12 +1,13 @@
 import 'package:alatmusik/models/Category.dart';
 
-class Bindings {
+// ignore: camel_case_types
+class Bindings_Category {
   Category category;
   Category image;
 
-  Bindings({this.category, this.image});
+  Bindings_Category({this.category, this.image});
 
-  Bindings.fromJson(Map<String, dynamic> json) {
+  Bindings_Category.fromJson(Map<String, dynamic> json) {
     category = json['category'] != null
         ? new Category.fromJson(json['category'])
         : null;
