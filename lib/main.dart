@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:alatmusik/screens/home_screens.dart';
+import 'package:alatmusik/screens/Home_screens.dart';
 
 void main() => runApp(MyApp(home: HomeScreen()));
 

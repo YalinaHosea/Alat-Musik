@@ -1,18 +1,18 @@
 import 'package:alatmusik/models/Head.dart';
-import 'package:alatmusik/models/Result_Category.dart';
+import 'package:alatmusik/models/Result_AlatMusik.dart';
 
-class Kategori {
+class AlatMusik {
   Head head;
-  Results_Category results;
+  Results_AlatMusik results;
 
-  Kategori({this.head, this.results});
+  AlatMusik({this.head, this.results});
 
-  // Kategori.fromJson(Map<String, dynamic> json) {
+  // AlatMusik.fromJson(Map<String, dynamic> json) {
   //   head = json['head'] != null ? new Head.fromJson(json['head']) : null;
   //   results =
   //       json['results'] != null ? new Results.fromJson(json['results']) : null;
   // }
-  //
+
   // Map<String, dynamic> toJson() {
   //   final Map<String, dynamic> data = new Map<String, dynamic>();
   //   if (this.head != null) {

@@ -1,9 +1,10 @@
 import 'package:alatmusik/models/Bindings_Category.dart';
+import 'package:alatmusik/screens/AlatMusik_Screens.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'maindrawer.dart';
 
@@ -32,10 +33,28 @@ class _HomeScreenState extends State<HomeScreen> {
   ApiRepository apiRepository = new ApiRepository();
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("MUSIKU"),
+          title: Text("Cari Alat Musik"),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  showSearch(context: context, delegate: DataSearch());
+                })
+          ],
         ),
         //Now we are going to open a new file
         // where we will create the layout of the Drawer
@@ -43,38 +62,15 @@ class _HomeScreenState extends State<HomeScreen> {
           child: MainDrawer(),
         ),
         body: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 25),
+            padding: EdgeInsets.only(left: 20, right: 20, top: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("Alat-alat Musik Tradisional Indonesia",
-                    style: TextStyle(
-                        color: kBlueColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 20),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  height: 50,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF5F5F7),
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      SvgPicture.asset("assets/icons/search.svg"),
-                      SizedBox(width: 16),
-                      Text(
-                        "Cari Alat Musik",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color(0XFFA0A5BD),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                // Text("Alat-alat Musik Tradisional Indonesia",
+                //     style: TextStyle(
+                //         color: kBlueColor,
+                //         fontWeight: FontWeight.bold,
+                //         fontSize: 20)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -86,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   future: apiRepository.getListkategori,
                   builder: (context,
                       AsyncSnapshot<List<Bindings_Category>> snapshot) {
+                    print(snapshot.data);
                     if (snapshot.data == null) {
                       return (Container(
                         child: Center(
@@ -120,21 +117,64 @@ class _HomeScreenState extends State<HomeScreen> {
                                             0, 30, rect.width, rect.height));
                                       },
                                       blendMode: BlendMode.darken,
-                                      child: Container(
-                                        width: double.infinity,
-                                        height:
-                                            MediaQuery.of(context).size.height,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFF5F4EF),
-                                          image: DecorationImage(
-                                            colorFilter: new ColorFilter.mode(
-                                                Colors.black.withOpacity(0.4),
-                                                BlendMode.darken),
-                                            image: AssetImage(
-                                                "assets/images/gesek.jpg" +
-                                                    bin.image.value),
-                                            fit: BoxFit.cover,
-                                            alignment: Alignment.topCenter,
+                                      child: GestureDetector(
+                                        onTap: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    AlatMusikScreens(
+                                                      Bindings_Category: bin,
+                                                    ))),
+                                        child: CachedNetworkImage(
+                                          imageUrl: url_gambar_category +
+                                              bin.getImage(),
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  Container(
+                                            padding: EdgeInsets.all(15),
+                                            height: index.isEven ? 200 : 240,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          placeholder: (context, url) =>
+                                              Container(
+                                            child: Center(
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    new AlwaysStoppedAnimation<
+                                                        Color>(kBlueColor),
+                                              ),
+                                            ),
+                                            padding: EdgeInsets.all(15),
+                                            height: index.isEven ? 200 : 240,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(8.0),
+                                              ),
+                                            ),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Container(
+                                            child: Center(
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    new AlwaysStoppedAnimation<
+                                                        Color>(kBlueColor),
+                                              ),
+                                            ),
+                                            padding: EdgeInsets.all(15),
+                                            height: index.isEven ? 200 : 240,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(8.0),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -149,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          bin.category.value,
+                                          bin.getCategory(),
                                           style: kTitleTextStyle.copyWith(
                                               color: Colors.white),
                                         ),
@@ -167,5 +207,116 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             )));
+  }
+}
+
+class DataSearch extends SearchDelegate<String> {
+  final cities = [
+    "Nanggroe Aceh Darussalam",
+    "Sumatera Utara",
+    "Sumatera Barat",
+    "Riau",
+    "Kepulauan Riau",
+    "Jambi",
+    "Bengkulu",
+    "Sumatera Selatan",
+    "Kepulauan Bangka Belitung",
+    "Lampung",
+    "Banten",
+    "DKI Jakarta",
+    "Jawa Barat",
+    "Jawa Tengah",
+    "Jawa Timur",
+    "DI Yogyakarta",
+    "Bali",
+    "Nusa Tenggara Barat",
+    "Nusa Tenggara Timur",
+    "Kalimantan Utara",
+    "Kalimantan Selatan",
+    "Kalimantan Barat",
+    "Kalimantan Timur",
+    "Kalimantan Tengah",
+    "Gorontalo",
+    "Sulawesi Utara",
+    "Sulawesi Selatan",
+    "Sulawesi Barat",
+    "Sulawesi Tenggara",
+    "Sulawesi Tengah",
+    "Maluku",
+    "Maluku Utara",
+    "Papua",
+    "Papua Barat"
+  ];
+
+  final recentCities = [
+    "Kepulauan Riau",
+    "Jambi",
+    "Bengkulu",
+    "Sumatera Selatan",
+    "Kepulauan Bangka Belitung",
+    "Lampung",
+    "Banten"
+  ];
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // actions for app bar
+    return [
+      IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () {
+            query = "";
+          })
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // leading icon on the left of the app bar
+    return IconButton(
+        icon: AnimatedIcon(
+            icon: AnimatedIcons.menu_arrow, progress: transitionAnimation),
+        onPressed: () {
+          close(context, null);
+        });
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // show some results based on the selection
+    return Container(
+      height: 100.0,
+      width: 100.0,
+      child: Text(query),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // show when someone searches for something
+    final suggestionList = query.isEmpty
+        ? recentCities
+        : cities.where((p) => p.startsWith(query)).toList();
+
+    return ListView.builder(
+      itemBuilder: (context, index) => ListTile(
+        onTap: () {
+          showResults(context);
+        },
+        leading: Icon(Icons.location_city),
+        title: RichText(
+          text: TextSpan(
+            text: suggestionList[index].substring(0, query.length),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            children: [
+              TextSpan(
+                  text: suggestionList[index].substring(query.length),
+                  style: TextStyle(color: Colors.grey))
+            ],
+          ),
+        ),
+      ),
+      itemCount: suggestionList.length,
+    );
   }
 }

@@ -51,7 +51,7 @@ class MainDrawer extends StatelessWidget {
       ListTile(
         onTap: () {},
         leading: Icon(
-          Icons.room_sharp,
+          Icons.edit,
           color: Colors.black,
         ),
         title: Text("Daerah"),
@@ -60,7 +60,7 @@ class MainDrawer extends StatelessWidget {
       ListTile(
         onTap: () {},
         leading: Icon(
-          Icons.wysiwyg_sharp,
+          Icons.delete,
           color: Colors.black,
         ),
         title: Text("Bahan"),
