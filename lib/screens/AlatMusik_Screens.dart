@@ -1,15 +1,16 @@
 import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Bindings_Category.dart';
-import 'package:alatmusik/models/Category.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AlatMusikScreens extends StatefulWidget {
-  final Category category;
+  final Bindings_Category category;
+
   const AlatMusikScreens(
       {Key key, this.category, Bindings_Category Bindings_Category})
       : super(key: key);
@@ -19,6 +20,7 @@ class AlatMusikScreens extends StatefulWidget {
 }
 
 class _AlatMusikScreensState extends State<AlatMusikScreens> {
+  var name;
   SharedPreferences sharedPreferences;
   ApiRepository apiRepository = new ApiRepository();
 
@@ -34,12 +36,13 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text("Jenis-Jenis Alat Musik"),
+                    Text(widget.category.getCategory(), style: kHeadingxSTyle)
                   ],
                 ),
                 SizedBox(height: 10),
                 FutureBuilder(
-                  future: apiRepository.getListAlatMusik,
+                  future:
+                      apiRepository.getListAlatMusik(widget.category.category),
                   builder: (context,
                       AsyncSnapshot<List<Bindings_AlatMusik>> snapshot) {
                     print(snapshot.data);
@@ -79,6 +82,8 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
                                       blendMode: BlendMode.darken,
                                       child: CachedNetworkImage(
                                         imageUrl: url_gambar_alatmusik +
+                                            widget.category.category +
+                                            "/1000x564/" +
                                             bin.getImage(),
                                         imageBuilder:
                                             (context, imageProvider) =>

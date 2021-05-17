@@ -1,3 +1,4 @@
+// ignore: camel_case_types
 class Binding_DAM {
   String description;
   String name;

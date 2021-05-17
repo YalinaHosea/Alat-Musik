@@ -1,3 +1,4 @@
+// ignore: camel_case_types
 class Bindings_AlatMusik {
   String name;
   String image;

@@ -4,7 +4,6 @@ import 'package:alatmusik/models/Binding_DAM.dart';
 import 'package:alatmusik/models/Bindings_Category.dart';
 import 'package:alatmusik/services/constants/constants.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/painting.dart';
 import 'package:xml2json/xml2json.dart';
 
 class ApiProvider {
@@ -34,15 +33,15 @@ class ApiProvider {
             category: item['binding'][0]['literal']['\$t'].toString(),
             image: item['binding'][1]['literal']['\$t'].toString()));
       }
-
       return bind;
     } else {
       return null;
     }
   }
 
-  Future<List<Bindings_AlatMusik>> getAlatMusik() async {
-    Response response = await dio.get(url_alatmusik);
+  Future<List<Bindings_AlatMusik>> getAlatMusik(String category) async {
+    var url = url_alatmusik + category + url_alatmusik1;
+    Response response = await dio.get(url);
     List<Bindings_AlatMusik> bind = new List();
     if (response.statusCode == 200) {
       // parse xml to json
@@ -53,8 +52,8 @@ class ApiProvider {
       // looping the parsed data and input to bind list
       for (var item in data['sparql']['results']['result']) {
         bind.add(Bindings_AlatMusik(
-            name: item['binding'][1]['literal']['\$t'].toString(),
-            image: item['binding'][2]['literal']['\$t'].toString()));
+            name: item['binding'][0]['literal']['\$t'].toString(),
+            image: item['binding'][1]['literal']['\$t'].toString()));
       }
       return bind;
     } else {
@@ -62,27 +61,18 @@ class ApiProvider {
     }
   }
 
-  Future<List<Binding_DAM>> getDetailAlatMusik() async {
+  Future<Binding_DAM> getDetailAlatMusik(String alatmusik) async {
+    // var url = url_detailasm + alatmusik;
+     var item = {"description": description, "name": name, "image", image, 
+     "video": video, "sumber" : sumber}
     Response response = await dio.get(url_detailasm);
-    List<Binding_DAM> bind = new List();
     if (response.statusCode == 200) {
       // parse xml to json
       xml2json.parse(response.data);
       var jsondata = xml2json.toGData();
       var data = json.decode(jsondata);
-
-      // looping the parsed data and input to bind list
-      for (var item in data['sparql']['results']['result']) {
-        bind.add(Binding_DAM(
-            description: item['binding'][0]['literal']['\$t'].toString(),
-            name: item['binding'][1]['literal']['\$t'].toString(),
-            image: item['binding'][2]['literal']['\$t'].toString(),
-            video: item['binding'][3]['literal']['\$t'].toString(),
-            sumber: item['binding'][4]['literal']['\$t'].toString()));
-      }
-      return bind;
-    } else {
-      return null;
     }
+    return item;
   }
+
 }
