@@ -32,14 +32,13 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(widget.alatmusik.getName(), style: kHeadingxSTyle)
+                    Text("Detail Alat Musik ", style: kHeadingxSTyle)
                   ],
                 ),
                 SizedBox(height: 10),
                 FutureBuilder(
-                  future: apiRepository.getListDetailAlatMusik(widget.alatmusik.),
-                  builder:
-                      (context, AsyncSnapshot<List<Binding_DAM>> snapshot) {
+                  future: apiRepository.getListDetailAlatMusik,
+                  builder: (context, AsyncSnapshot<Binding_DAM> snapshot) {
                     print(snapshot.data);
                     if (snapshot.data == null) {
                       return (Container(
@@ -48,7 +47,36 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                         ),
                       ));
                     } else {
-                      
+                      return Expanded(
+                          child: (Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                            Text(
+                              snapshot.data.description,
+                              style:
+                                  kTitleTextStyle.copyWith(color: Colors.white),
+                            ),
+                            Text(
+                              snapshot.data.name,
+                              style:
+                                  kTitleTextStyle.copyWith(color: Colors.white),
+                            ),
+                            Text(
+                              snapshot.data.image,
+                              style:
+                                  kTitleTextStyle.copyWith(color: Colors.white),
+                            ),
+                            Text(
+                              snapshot.data.video,
+                              style:
+                                  kTitleTextStyle.copyWith(color: Colors.white),
+                            ),
+                            Text(
+                              snapshot.data.sumber,
+                              style:
+                                  kTitleTextStyle.copyWith(color: Colors.white),
+                            ),
+                          ])));
                     }
                   },
                 ),

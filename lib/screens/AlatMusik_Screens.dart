@@ -1,5 +1,6 @@
 import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Bindings_Category.dart';
+import 'package:alatmusik/screens/Detail_AM_Screens.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -80,56 +81,65 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
                                             0, 30, rect.width, rect.height));
                                       },
                                       blendMode: BlendMode.darken,
-                                      child: CachedNetworkImage(
-                                        imageUrl: url_gambar_alatmusik +
-                                            widget.category.category +
-                                            "/1000x564/" +
-                                            bin.getImage(),
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          padding: EdgeInsets.all(15),
-                                          height: index.isEven ? 200 : 240,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.cover,
+                                      child: GestureDetector(
+                                        onTap: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    Detail_alatmusik_screens(
+                                                      alatmusik: bin,
+                                                    ))),
+                                        child: CachedNetworkImage(
+                                          imageUrl: url_gambar_alatmusik +
+                                              widget.category.category +
+                                              "/1000x564/" +
+                                              bin.getImage(),
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  Container(
+                                            padding: EdgeInsets.all(15),
+                                            height: index.isEven ? 200 : 240,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        placeholder: (context, url) =>
-                                            Container(
-                                          child: Center(
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  new AlwaysStoppedAnimation<
-                                                      Color>(kBlueColor),
+                                          placeholder: (context, url) =>
+                                              Container(
+                                            child: Center(
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    new AlwaysStoppedAnimation<
+                                                        Color>(kBlueColor),
+                                              ),
+                                            ),
+                                            padding: EdgeInsets.all(15),
+                                            height: index.isEven ? 200 : 240,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(8.0),
+                                              ),
                                             ),
                                           ),
-                                          padding: EdgeInsets.all(15),
-                                          height: index.isEven ? 200 : 240,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(8.0),
+                                          errorWidget: (context, url, error) =>
+                                              Container(
+                                            child: Center(
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    new AlwaysStoppedAnimation<
+                                                        Color>(kBlueColor),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            Container(
-                                          child: Center(
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  new AlwaysStoppedAnimation<
-                                                      Color>(kBlueColor),
-                                            ),
-                                          ),
-                                          padding: EdgeInsets.all(15),
-                                          height: index.isEven ? 200 : 240,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(8.0),
+                                            padding: EdgeInsets.all(15),
+                                            height: index.isEven ? 200 : 240,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(8.0),
+                                              ),
                                             ),
                                           ),
                                         ),

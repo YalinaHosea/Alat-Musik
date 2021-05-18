@@ -16,6 +16,6 @@ class ApiRepository {
   Future<List<Bindings_Category>> get getListkategori => provider.getKategori();
   Future<List<Bindings_AlatMusik>> getListAlatMusik(String category) =>
       provider.getAlatMusik(category);
-  Future<Binding_DAM> getListDetailAlatMusik(String alatmusik) =>
-      provider.getDetailAlatMusik(alatmusik);
+  Future<Binding_DAM> get getListDetailAlatMusik =>
+      provider.getDetailAlatMusik();
 }

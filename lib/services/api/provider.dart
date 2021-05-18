@@ -61,18 +61,28 @@ class ApiProvider {
     }
   }
 
-  Future<Binding_DAM> getDetailAlatMusik(String alatmusik) async {
+  Future<Binding_DAM> getDetailAlatMusik() async {
     // var url = url_detailasm + alatmusik;
-     var item = {"description": description, "name": name, "image", image, 
-     "video": video, "sumber" : sumber}
     Response response = await dio.get(url_detailasm);
     if (response.statusCode == 200) {
       // parse xml to json
       xml2json.parse(response.data);
       var jsondata = xml2json.toGData();
       var data = json.decode(jsondata);
+      print(data);
+      Binding_DAM bind = Binding_DAM(
+          description: data['sparql']['results']['result'][0]['literal']['\$t']
+              .toString(),
+          name: data['sparql']['results']['result'][1]['literal']['\$t']
+              .toString(),
+          image: data['sparql']['results']['result'][2]['literal']['\$t']
+              .toString(),
+          video: data['sparql']['results']['result'][3]['literal']['\$t']
+              .toString(),
+          sumber: data['sparql']['results']['result'][4]['literal']['\$t']
+              .toString());
+      return bind;
     }
-    return item;
+    return null;
   }
-
 }
