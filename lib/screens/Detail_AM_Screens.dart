@@ -61,10 +61,8 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                               style:
                                   kTitleTextStyle.copyWith(color: Colors.white),
                             ),
-                            Text(
+                            Image.network(
                               snapshot.data.image,
-                              style:
-                                  kTitleTextStyle.copyWith(color: Colors.white),
                             ),
                             Text(
                               snapshot.data.video,
