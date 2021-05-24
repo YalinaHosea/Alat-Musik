@@ -2,13 +2,16 @@ import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Binding_DAM.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Detail_alatmusik_screens extends StatefulWidget {
   final Bindings_AlatMusik alatmusik;
+  final String url;
 
-  const Detail_alatmusik_screens({Key key, this.alatmusik}) : super(key: key);
+  const Detail_alatmusik_screens({Key key, this.alatmusik, this.url})
+      : super(key: key);
 
   @override
   _Detail_alatmusik_screensState createState() =>
@@ -51,18 +54,16 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                           child: (Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                            Text(
-                              snapshot.data.description,
-                              style:
-                                  kTitleTextStyle.copyWith(color: Colors.white),
-                            ),
+                            CachedNetworkImage(imageUrl: widget.url),
                             Text(
                               snapshot.data.name,
                               style:
                                   kTitleTextStyle.copyWith(color: Colors.white),
                             ),
-                            Image.network(
-                              snapshot.data.image,
+                            Text(
+                              snapshot.data.description,
+                              style:
+                                  kTitleTextStyle.copyWith(color: Colors.white),
                             ),
                             Text(
                               snapshot.data.video,

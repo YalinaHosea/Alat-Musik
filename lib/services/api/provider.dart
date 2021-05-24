@@ -68,18 +68,13 @@ class ApiProvider {
       xml2json.parse(response.data);
       var jsondata = xml2json.toGData();
       var data = json.decode(jsondata);
-      print("debug");
-      print(data);
-
-      Binding_DAM bind;
-      for (var item in data['results']['bindings']) {
-        bind = Binding_DAM(
-            description: item['description']['value'].toString(),
-            name: item['name']['value'].toString(),
-            image: item['image']['value'].toString(),
-            video: item['video']['value'].toString(),
-            sumber: item['sumber']['value'].toString());
-      }
+      var item = data['sparql']['results']['results']['binding'];
+      Binding_DAM bind = new Binding_DAM(
+          description: item['description']['value'].toString(),
+          name: item['name']['value'].toString(),
+          image: item['image']['value'].toString(),
+          video: item['video']['value'].toString(),
+          sumber: item['sumber']['value'].toString());
       return bind;
     }
     return null;

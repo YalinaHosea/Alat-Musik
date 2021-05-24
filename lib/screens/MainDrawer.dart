@@ -26,35 +26,19 @@ class MainDrawer extends StatelessWidget {
                               width: 80,
                               height: 80,
                               child: Image(
-                                image: AssetImage('assets/images/1.png'),
+                                image: AssetImage('assets/images/angklung.jpg'),
                               ),
                             ),
-                            // CircleAvatar(
-                            //   radius: 50.0,
-                            //   backgroundImage: NetworkImage(
-                            //     "https://images.unsplash.com/photo-1594616838951-c155f8d978a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   height: 5.0,
-                            // ),
-                            // Text(
-                            //   "Yalina",
-                            //   style: TextStyle(
-                            //     fontSize: 22.0,
-                            //     fontWeight: FontWeight.w800,
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   height: 5.0,
-                            // ),
-                            // Text(
-                            //   "Software Engenieer",
-                            //   style: TextStyle(
-                            //     fontSize: 16.0,
-                            //     fontWeight: FontWeight.w400,
-                            //   ),
-                            // ),
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Text(
+                              "MUSIK INDONESIA",
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
                           ],
                         ),
                       ),
