@@ -40,7 +40,8 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                 ),
                 SizedBox(height: 10),
                 FutureBuilder(
-                  future: apiRepository.getListDetailAlatMusik,
+                  future: apiRepository
+                      .getListDetailAlatMusik(widget.alatmusik.name),
                   builder: (context, AsyncSnapshot<Binding_DAM> snapshot) {
                     print(snapshot.data);
                     if (snapshot.data == null) {
@@ -54,26 +55,28 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                           child: (Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                            CachedNetworkImage(imageUrl: widget.url),
+                            CachedNetworkImage(
+                              imageUrl: widget.url,
+                            ),
                             Text(
                               snapshot.data.name,
-                              style:
-                                  kTitleTextStyle.copyWith(color: Colors.white),
+                              style: kTitleTextStyle.copyWith(
+                                  color: Colors.black38),
                             ),
                             Text(
                               snapshot.data.description,
-                              style:
-                                  kTitleTextStyle.copyWith(color: Colors.white),
+                              style: kTitleTextStyle.copyWith(
+                                  color: Colors.black38),
                             ),
                             Text(
                               snapshot.data.video,
-                              style:
-                                  kTitleTextStyle.copyWith(color: Colors.white),
+                              style: kTitleTextStyle.copyWith(
+                                  color: Colors.black38),
                             ),
                             Text(
                               snapshot.data.sumber,
-                              style:
-                                  kTitleTextStyle.copyWith(color: Colors.white),
+                              style: kTitleTextStyle.copyWith(
+                                  color: Colors.black38),
                             ),
                           ])));
                     }

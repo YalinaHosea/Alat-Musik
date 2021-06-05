@@ -1,3 +1,4 @@
+import 'package:alatmusik/models/Bind_Detail.dart';
 import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Binding_DAM.dart';
 import 'package:alatmusik/models/Bindings_Category.dart';
@@ -16,6 +17,6 @@ class ApiRepository {
   Future<List<Bindings_Category>> get getListkategori => provider.getKategori();
   Future<List<Bindings_AlatMusik>> getListAlatMusik(String category) =>
       provider.getAlatMusik(category);
-  Future<Binding_DAM> get getListDetailAlatMusik =>
-      provider.getDetailAlatMusik();
+  Future<Binding_DAM> getListDetailAlatMusik(String nama_alatmusik) =>
+      provider.getDetailAlatMusik(nama_alatmusik);
 }

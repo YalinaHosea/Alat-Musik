@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:alatmusik/models/Bind_Detail.dart';
 import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Binding_DAM.dart';
 import 'package:alatmusik/models/Bindings_Category.dart';
@@ -61,21 +62,43 @@ class ApiProvider {
     }
   }
 
-  Future<Binding_DAM> getDetailAlatMusik() async {
-    Response response = await dio.get(url_detailasm);
+  Future<Binding_DAM> getDetailAlatMusik(String nama_alatmusik) async {
+    Response response =
+        await dio.get(url_detailasm_1 + nama_alatmusik + url_detailasm_2);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       // parse xml to json
       xml2json.parse(response.data);
-      var jsondata = xml2json.toGData();
-      var data = json.decode(jsondata);
-      var item = data['sparql']['results']['results']['binding'];
-      Binding_DAM bind = new Binding_DAM(
-          description: item['description']['value'].toString(),
-          name: item['name']['value'].toString(),
-          image: item['image']['value'].toString(),
-          video: item['video']['value'].toString(),
-          sumber: item['sumber']['value'].toString());
-      return bind;
+      var jsondata = xml2json.toParker();
+      var data = jsonDecode(jsondata);
+      //  print('wkwkwk : ' + data['head']);
+      Bind_Detail det = Bind_Detail.fromJson(data['sparql']);
+      Bindings bin = det.results.bindings;
+      Binding_DAM dam = new Binding_DAM(
+          description: bin.description.value,
+          name: bin.name.value,
+          image: bin.image.value,
+          video: bin.video.value,
+          sumber: bin.sumber.value);
+      return dam;
+      // var item = data['sparql']['results']['results']['binding'];
+      // Binding_DAM bind = new Binding_DAM(
+      //     description: item['description']['value'] == null
+      //         ? ""
+      //         : item['description']['value'].toString(),
+      //     name: item['name']['value'] == null
+      //         ? ""
+      //         : item['name']['value'].toString(),
+      //     image: item['image']['value'] == null
+      //         ? ""
+      //         : item['image']['value'].toString(),
+      //     video: item['video']['value'] == null
+      //         ? ""
+      //         : item['video']['value'].toString(),
+      //     sumber: item['sumber']['value'] == null
+      //         ? ""
+      //         : item['sumber']['value'].toString());
+      // return bind;
     }
     return null;
   }

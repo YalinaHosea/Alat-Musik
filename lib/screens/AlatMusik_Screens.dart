@@ -88,7 +88,12 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
                                                 builder: (_) =>
                                                     Detail_alatmusik_screens(
                                                       alatmusik: bin,
-                                                      url: url_detailasm,
+                                                      url:
+                                                          url_gambar_alatmusik +
+                                                              widget.category
+                                                                  .category +
+                                                              "/1000x564/" +
+                                                              bin.getImage(),
                                                     ))),
                                         child: CachedNetworkImage(
                                           imageUrl: url_gambar_alatmusik +
