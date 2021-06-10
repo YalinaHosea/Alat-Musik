@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:alatmusik/models/Bind_Detail.dart';
 import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Binding_DAM.dart';
+import 'package:alatmusik/models/Binding_Post.dart';
 import 'package:alatmusik/models/Bindings_Category.dart';
 import 'package:alatmusik/services/constants/constants.dart';
 import 'package:dio/dio.dart';
@@ -102,4 +103,40 @@ class ApiProvider {
     }
     return null;
   }
+
+  Future<List<Bindings_Post>> getPostSearching() async {
+    Response response = await dio.get(url_postSearching);
+    List<Bindings_Post> bind = new List();
+    if (response.statusCode == 200) {
+      // parse xml to json
+      xml2json.parse(response.data);
+      var jsondata = xml2json.toGData();
+      var data = json.decode(jsondata);
+
+      // looping the parsed data and input to bind list
+      for (var item in data['sparql']['results']['result']) {
+        bind.add(Bindings_Post(
+            labelclass: item['binding'][0]['literal']['\$t'].toString(),
+            label: item['binding'][0]['literal']['\$t'].toString(),
+            image: item['binding'][0]['literal']['\$t'].toString(),
+            link: item['binding'][1]['literal']['\$t'].toString()));
+      }
+      return bind;
+    } else {
+      return null;
+    }
+  }
+
+  // Future<void> _getData() async{
+  //   var url = 'https://jsonplaceholder.typicode.com/posts';
+  //   http.get(url).then((data){
+  //    return json.decode(data.body);
+  //   }).then((data){
+  //     for(var json in data){
+  //       _posts.add(Post.fromJson(json));
+  //     }
+  //   }).catchError((e){
+  //     print(e);
+  //   });
+  // }
 }

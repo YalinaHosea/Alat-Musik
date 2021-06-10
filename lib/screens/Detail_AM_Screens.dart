@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Detail_alatmusik_screens extends StatefulWidget {
   final Bindings_AlatMusik alatmusik;
   final String url;
+  // final Function function_video;
 
   const Detail_alatmusik_screens({Key key, this.alatmusik, this.url})
       : super(key: key);
@@ -26,19 +27,22 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black38),
+          backgroundColor: Colors.white,
+        ),
         body: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 25),
+            padding: EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text("Detail Alat Musik ", style: kHeadingxSTyle)
-                  ],
-                ),
-                SizedBox(height: 10),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: <Widget>[
+                //     // Text("Detail Alat Musik ", style: kHeadingxSTyle)
+                //   ],
+                // ),
+                // SizedBox(height: 10),
                 FutureBuilder(
                   future: apiRepository
                       .getListDetailAlatMusik(widget.alatmusik.name),
@@ -52,33 +56,49 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                       ));
                     } else {
                       return Expanded(
-                          child: (Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                            CachedNetworkImage(
-                              imageUrl: widget.url,
-                            ),
-                            Text(
-                              snapshot.data.name,
-                              style: kTitleTextStyle.copyWith(
-                                  color: Colors.black38),
-                            ),
-                            Text(
-                              snapshot.data.description,
-                              style: kTitleTextStyle.copyWith(
-                                  color: Colors.black38),
-                            ),
-                            Text(
-                              snapshot.data.video,
-                              style: kTitleTextStyle.copyWith(
-                                  color: Colors.black38),
-                            ),
-                            Text(
-                              snapshot.data.sumber,
-                              style: kTitleTextStyle.copyWith(
-                                  color: Colors.black38),
-                            ),
-                          ])));
+                          child: SingleChildScrollView(
+                        padding: EdgeInsets.zero,
+                        child: (Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                snapshot.data.name,
+                                style: kHeadingxSTyle,
+                              ),
+                              SizedBox(height: 10),
+                              CachedNetworkImage(
+                                imageUrl: widget.url,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                snapshot.data.description,
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                "Sumber : ",
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                              Text(
+                                snapshot.data.sumber,
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                "Link Video : ",
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                              Text(
+                                snapshot.data.video,
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                            ])),
+                      ));
                     }
                   },
                 ),

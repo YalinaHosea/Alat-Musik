@@ -28,7 +28,10 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black38),
+          backgroundColor: Colors.white,
+        ),
         body: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 25),
             child: Column(
