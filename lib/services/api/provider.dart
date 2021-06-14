@@ -4,6 +4,7 @@ import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Binding_DAM.dart';
 import 'package:alatmusik/models/Binding_Post.dart';
 import 'package:alatmusik/models/Bindings_Category.dart';
+import 'package:alatmusik/models/Search_Result.dart';
 import 'package:alatmusik/services/constants/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:xml2json/xml2json.dart';
@@ -104,26 +105,44 @@ class ApiProvider {
     return null;
   }
 
-  Future<List<Bindings_Post>> getPostSearching() async {
-    Response response = await dio.get(url_postSearching);
-    List<Bindings_Post> bind = new List();
-    if (response.statusCode == 200) {
-      // parse xml to json
-      xml2json.parse(response.data);
-      var jsondata = xml2json.toGData();
-      var data = json.decode(jsondata);
+  Future<List<Search_Result>> getPostSearching(String keyword) async {
+    if (keyword != "") {
+      Response response = await dio.get(url_postSearching +
+          keyword +
+          url_postSearching2 +
+          keyword +
+          url_postSearching3 +
+          keyword +
+          url_postSearching4 +
+          keyword +
+          url_postSearching5 +
+          keyword +
+          url_postSearching6);
+      List<Search_Result> bind = new List();
+      if (response.statusCode == 200) {
+        // parse xml to json
+        xml2json.parse(response.data);
+        var jsondata = xml2json.toGData();
+        var data = json.decode(jsondata);
+        var result = data['sparql']['results']['result'];
+        if (result.length > 1) {
+          for (var item in result) {
+            bind.add(Search_Result(
+                kategori: item['binding'][0]['literal']['\$t'].toString(),
+                nama: item['binding'][1]['literal']['\$t'].toString(),
+                image: item['binding'][2]['literal']['\$t'].toString()));
+          }
+        } else {
+          bind.add(Search_Result(
+              kategori: result['binding'][0]['literal']['\$t'].toString(),
+              nama: result['binding'][1]['literal']['\$t'].toString(),
+              image: result['binding'][2]['literal']['\$t'].toString()));
+        }
 
-      // looping the parsed data and input to bind list
-      for (var item in data['sparql']['results']['result']) {
-        bind.add(Bindings_Post(
-            labelclass: item['binding'][0]['literal']['\$t'].toString(),
-            label: item['binding'][0]['literal']['\$t'].toString(),
-            image: item['binding'][0]['literal']['\$t'].toString(),
-            link: item['binding'][1]['literal']['\$t'].toString()));
+        return bind;
+      } else {
+        return null;
       }
-      return bind;
-    } else {
-      return null;
     }
   }
 

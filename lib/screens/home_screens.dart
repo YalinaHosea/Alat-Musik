@@ -1,9 +1,13 @@
+import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Bindings_Category.dart';
+import 'package:alatmusik/models/Search_Result.dart';
 import 'package:alatmusik/screens/AlatMusik_Screens.dart';
+import 'package:alatmusik/screens/Detail_AM_Screens.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'maindrawer.dart';
 
@@ -46,6 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black38),
+          backgroundColor: Colors.white,
           title: Text("Cari Alat Musik"),
           actions: <Widget>[
             IconButton(
@@ -205,51 +211,24 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  final cities = [
-    "Nanggroe Aceh Darussalam",
-    "Sumatera Utara",
-    "Sumatera Barat",
-    "Riau",
-    "Kepulauan Riau",
-    "Jambi",
-    "Bengkulu",
-    "Sumatera Selatan",
-    "Kepulauan Bangka Belitung",
-    "Lampung",
-    "Banten",
-    "DKI Jakarta",
-    "Jawa Barat",
-    "Jawa Tengah",
-    "Jawa Timur",
-    "DI Yogyakarta",
-    "Bali",
-    "Nusa Tenggara Barat",
-    "Nusa Tenggara Timur",
-    "Kalimantan Utara",
-    "Kalimantan Selatan",
-    "Kalimantan Barat",
-    "Kalimantan Timur",
-    "Kalimantan Tengah",
-    "Gorontalo",
-    "Sulawesi Utara",
-    "Sulawesi Selatan",
-    "Sulawesi Barat",
-    "Sulawesi Tenggara",
-    "Sulawesi Tengah",
-    "Maluku",
-    "Maluku Utara",
-    "Papua",
-    "Papua Barat"
+  final alatmusik = [
+    "Aramba",
+    "Tifa",
+    "Bonang",
+    "Seruling",
+    "Sasando",
+    "Gendang",
+    "Tehyan"
   ];
 
-  final recentCities = [
-    "Kepulauan Riau",
-    "Jambi",
-    "Bengkulu",
-    "Sumatera Selatan",
-    "Kepulauan Bangka Belitung",
-    "Lampung",
-    "Banten"
+  final recentAlatMusik = [
+    "Aramba",
+    "Tifa",
+    "Bonang",
+    "Seruling",
+    "Sasando",
+    "Gendang",
+    "Tehyan"
   ];
 
   @override
@@ -277,11 +256,134 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
+    ApiRepository apiRepository = new ApiRepository();
     // show some results based on the selection
-    return Container(
-      height: 100.0,
-      width: 100.0,
-      child: Text(query),
+    return FutureBuilder(
+      future: apiRepository.getListPostSearching(query),
+      builder: (context, AsyncSnapshot<List<Search_Result>> snapshot) {
+        print(snapshot.data);
+        if (snapshot.data == null) {
+          return (Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ));
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: (Expanded(
+              child: StaggeredGridView.countBuilder(
+                  padding: EdgeInsets.all(0),
+                  crossAxisCount: 2,
+                  itemCount: snapshot.data.length,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  itemBuilder: (context, index) {
+                    Search_Result bin = snapshot.data[index];
+                    Bindings_AlatMusik alatmusik = new Bindings_AlatMusik(
+                        name: bin.nama, image: bin.image);
+                    return Stack(
+                      children: <Widget>[
+                        ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          child: ShaderMask(
+                            shaderCallback: (rect) {
+                              return LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.transparent, Colors.black],
+                              ).createShader(Rect.fromLTRB(
+                                  0, 30, rect.width, rect.height));
+                            },
+                            blendMode: BlendMode.darken,
+                            child: GestureDetector(
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => Detail_alatmusik_screens(
+                                            alatmusik: alatmusik,
+                                            url: url_gambar_alatmusik +
+                                                bin.kategori +
+                                                "/1000x564/" +
+                                                bin.image,
+                                          ))),
+                              child: CachedNetworkImage(
+                                imageUrl: url_gambar_alatmusik +
+                                    bin.kategori +
+                                    "/1000x564/" +
+                                    bin.image,
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  padding: EdgeInsets.all(15),
+                                  height: index.isEven ? 200 : 240,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                placeholder: (context, url) => Container(
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      valueColor:
+                                          new AlwaysStoppedAnimation<Color>(
+                                              kBlueColor),
+                                    ),
+                                  ),
+                                  padding: EdgeInsets.all(15),
+                                  height: index.isEven ? 200 : 240,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8.0),
+                                    ),
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) => Container(
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      valueColor:
+                                          new AlwaysStoppedAnimation<Color>(
+                                              kBlueColor),
+                                    ),
+                                  ),
+                                  padding: EdgeInsets.all(15),
+                                  height: index.isEven ? 200 : 240,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(8.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          //hanya bisa ada di anak nya stack
+                          bottom: 15,
+                          left: 15,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                bin.nama,
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  staggeredTileBuilder: (index) => StaggeredTile.fit(1)),
+            )),
+          );
+        }
+      },
     );
   }
 
@@ -289,15 +391,15 @@ class DataSearch extends SearchDelegate<String> {
   Widget buildSuggestions(BuildContext context) {
     // show when someone searches for something
     final suggestionList = query.isEmpty
-        ? recentCities
-        : cities.where((p) => p.startsWith(query)).toList();
+        ? recentAlatMusik
+        : alatmusik.where((p) => p.startsWith(query)).toList();
 
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
         onTap: () {
           showResults(context);
         },
-        leading: Icon(Icons.location_city),
+        leading: Icon(Icons.music_note),
         title: RichText(
           text: TextSpan(
             text: suggestionList[index].substring(0, query.length),
