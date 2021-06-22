@@ -1,15 +1,15 @@
-import 'package:alatmusik/models/Binding_Post.dart';
+import 'package:alatmusik/models/Binding_Daerah.dart';
 
-class Results_Post {
-  List<Bindings_Post> bindings;
+class Results_Daerah {
+  List<Bindings_Daerah> bindings;
 
-  Results_Post({this.bindings});
+  Results_Daerah({this.bindings});
 
-  // Results_Post.fromJson(Map<String, dynamic> json) {
+  // Results_Daerah.fromJson(Map<String, dynamic> json) {
   //   if (json['bindings'] != null) {
-  //     bindings = new List<Bindings_Post>();
+  //     bindings = new List<Bindings_Daerah>();
   //     json['bindings'].forEach((v) {
-  //       bindings.add(new Bindings_Post.fromJson(v));
+  //       bindings.add(new Bindings_Daerah.fromJson(v));
   //     });
   //   }
   // }
@@ -21,5 +21,4 @@ class Results_Post {
   //   }
   //   return data;
   // }
-// }
 }

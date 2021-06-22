@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:alatmusik/models/Bind_Detail.dart';
 import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Binding_DAM.dart';
-import 'package:alatmusik/models/Binding_Post.dart';
+import 'package:alatmusik/models/Binding_Daerah.dart';
 import 'package:alatmusik/models/Bindings_Category.dart';
 import 'package:alatmusik/models/Search_Result.dart';
 import 'package:alatmusik/services/constants/constants.dart';
@@ -73,7 +73,7 @@ class ApiProvider {
       xml2json.parse(response.data);
       var jsondata = xml2json.toParker();
       var data = jsonDecode(jsondata);
-      //  print('wkwkwk : ' + data['head']);
+
       Bind_Detail det = Bind_Detail.fromJson(data['sparql']);
       Bindings bin = det.results.bindings;
       Binding_DAM dam = new Binding_DAM(
@@ -146,16 +146,49 @@ class ApiProvider {
     }
   }
 
-  // Future<void> _getData() async{
-  //   var url = 'https://jsonplaceholder.typicode.com/posts';
-  //   http.get(url).then((data){
-  //    return json.decode(data.body);
-  //   }).then((data){
-  //     for(var json in data){
-  //       _posts.add(Post.fromJson(json));
-  //     }
-  //   }).catchError((e){
-  //     print(e);
+  Future<List<String>> getDaerah(filter) async {
+    var url;
+    if (filter == "Daerah") {
+      url = url_daerah;
+    } else if (filter == "Logam") {
+      url = url_bahan_logam;
+    } else if (filter == "Non Logam") {
+      url = url_bahan_nonlogam;
+    } else if (filter == "Upacara") {
+      url = url_kegunaan_upacara;
+    } else if (filter == "Hiburan") {
+      url = url_kegunaan_hiburan;
+    }
+    if (url != null) {
+      Response response = await dio.get(url);
+      List<String> bind = new List();
+      if (response.statusCode == 200) {
+        // parse xml to json
+        xml2json.parse(response.data);
+        var jsondata = xml2json.toGData();
+        var data = json.decode(jsondata);
+
+        // looping the parsed data and input to bind list
+        for (var item in data['sparql']['results']['result']) {
+          bind.add(item['binding'][1]['literal']['\$t'].toString());
+        }
+        return bind;
+      } else {
+        return null;
+      }
+    }
+  }
+  //   Future<String> country() async {
+  //   var res = await http.get(
+  //       Uri.encodeFull("Your API url"),
+  //       headers: {"Accept": "application/json"}); //if you have any auth key place here...properly..
+  //   var resBody = json.decode(res.body);
+
+  //   setState(() {
+  //     country_data = resBody;
   //   });
+
+  //   return "Sucess";
   // }
+
 }

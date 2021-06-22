@@ -163,10 +163,13 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text(
-                                          bin.getName(),
-                                          style: kTitleTextStyle.copyWith(
-                                              color: Colors.white),
+                                        Container(
+                                          width: 120,
+                                          child: Text(
+                                            bin.getName(),
+                                            style: kTitleTextStyle.copyWith(
+                                                color: Colors.white),
+                                          ),
                                         ),
                                       ],
                                     ),

@@ -1,3 +1,6 @@
+import 'package:alatmusik/screens/Filter_Bahan.dart';
+import 'package:alatmusik/screens/Filter_Kegunaan.dart';
+import 'package:alatmusik/screens/Filter_screens.dart';
 import 'package:alatmusik/services/constants/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +30,14 @@ class MainDrawer extends StatelessWidget {
           child: ListView(
         children: [
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => FilterScreen(
+                            filter: "Daerah",
+                          )));
+            },
             leading: Icon(
               Icons.add_location_alt,
               color: Colors.black,
@@ -35,7 +45,10 @@ class MainDrawer extends StatelessWidget {
             title: Text("Daerah"),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => FilterBahanScreen()));
+            },
             leading: Icon(
               Icons.archive,
               color: Colors.black,
@@ -43,7 +56,10 @@ class MainDrawer extends StatelessWidget {
             title: Text("Bahan"),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => FIlterKegunaanScreen()));
+            },
             leading: Icon(
               Icons.multitrack_audio,
               color: Colors.black,

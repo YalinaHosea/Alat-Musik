@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text("Category", style: kHeadingxSTyle),
+                    Text("Almustra", style: kHeadingxSTyle),
                   ],
                 ),
                 SizedBox(height: 15),
@@ -368,10 +368,13 @@ class DataSearch extends SearchDelegate<String> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(
-                                bin.nama,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.white),
+                              Container(
+                                width: 100,
+                                child: Text(
+                                  bin.nama,
+                                  style: kTitleTextStyle.copyWith(
+                                      color: Colors.white),
+                                ),
                               ),
                             ],
                           ),

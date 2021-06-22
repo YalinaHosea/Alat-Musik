@@ -5,6 +5,7 @@ import 'package:alatmusik/services/constants/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Detail_alatmusik_screens extends StatefulWidget {
   final Bindings_AlatMusik alatmusik;
@@ -23,6 +24,13 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
   var desription;
   SharedPreferences sharedPreferences;
   ApiRepository apiRepository = new ApiRepository();
+  redirect(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,15 +96,41 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                               ),
                               SizedBox(height: 10),
                               Text(
-                                "Link Video : ",
+                                "Video ",
                                 style: kTitleTextStyle.copyWith(
                                     color: Colors.black38),
                               ),
-                              Text(
-                                snapshot.data.video,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
-                              ),
+                              Container(
+                                  margin: EdgeInsets.symmetric(vertical: 10),
+                                  height: 50,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: FlatButton(
+                                        padding: EdgeInsets.all(10),
+                                        color: kBlueColor,
+                                        onPressed: () {
+                                          redirect(snapshot.data.video);
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.play_circle_filled,
+                                              color: Colors.white,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              "Putar video " +
+                                                  snapshot.data.name,
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )
+                                          ],
+                                        )),
+                                  )),
                             ])),
                       ));
                     }
