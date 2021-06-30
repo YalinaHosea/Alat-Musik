@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:alatmusik/models/Bind_Detail.dart';
 import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Binding_DAM.dart';
-import 'package:alatmusik/models/Binding_Daerah.dart';
 import 'package:alatmusik/models/Bindings_Category.dart';
 import 'package:alatmusik/models/Search_Result.dart';
 import 'package:alatmusik/services/constants/constants.dart';
@@ -67,8 +66,21 @@ class ApiProvider {
   Future<Binding_DAM> getDetailAlatMusik(String nama_alatmusik) async {
     Response response =
         await dio.get(url_detailasm_1 + nama_alatmusik + url_detailasm_2);
-    print(response.statusCode);
-    if (response.statusCode == 200) {
+    print("response 1 : " + response.statusCode.toString());
+    Response response2 =
+        await dio.get(url_detail_daerah1 + nama_alatmusik + url_detail_daerah2);
+    print("response 2 : " + response2.statusCode.toString());
+    Response response4 = await dio
+        .get(url_detail_kegunaan1 + nama_alatmusik + url_detail_kegunaan2);
+    // print(url_detail_kegunaan1);
+    Response response3 =
+        await dio.get(url_detail_bahan1 + nama_alatmusik + url_detail_bahan2);
+    print(url_detail_bahan1);
+
+    if (response.statusCode == 200 &&
+        response2.statusCode == 200 &&
+        response3.statusCode == 200 &&
+        response4.statusCode == 200) {
       // parse xml to json
       xml2json.parse(response.data);
       var jsondata = xml2json.toParker();
@@ -76,31 +88,53 @@ class ApiProvider {
 
       Bind_Detail det = Bind_Detail.fromJson(data['sparql']);
       Bindings bin = det.results.bindings;
+
+      //daerah
+      xml2json.parse(response2.data);
+      var jsondata2 = xml2json.toParker();
+      var data2 = jsonDecode(jsondata2);
+      String daerah = data2['sparql']['results']['result']['binding'][0]
+              ['literal']
+          .toString();
+
+      //bahan
+      xml2json.parse(response3.data);
+      var jsondata3 = xml2json.toParker();
+      var data3 = jsonDecode(jsondata3);
+      List<String> bahan = new List();
+      var result = data3['sparql']['results']['result'];
+      if (result.length > 1) {
+        for (var item in result) {
+          bahan.add(item['binding'][0]['literal'].toString());
+        }
+      } else {
+        bahan.add(result['binding'][0]['literal'].toString());
+      }
+
+      //kegunaan
+      xml2json.parse(response4.data);
+      var jsondata4 = xml2json.toParker();
+      var data4 = jsonDecode(jsondata4);
+      List<String> kegunaan = new List();
+      var result2 = data4['sparql']['results']['result'];
+      if (result2.length > 1) {
+        for (var item in result2) {
+          kegunaan.add(item['binding'][0]['literal'].toString());
+        }
+      } else {
+        kegunaan.add(result2['binding'][0]['literal']['\$t'].toString());
+      }
+
       Binding_DAM dam = new Binding_DAM(
           description: bin.description.value,
           name: bin.name.value,
           image: bin.image.value,
           video: bin.video.value,
-          sumber: bin.sumber.value);
+          sumber: bin.sumber.value,
+          daerah: daerah,
+          bahan: bahan);
+
       return dam;
-      // var item = data['sparql']['results']['results']['binding'];
-      // Binding_DAM bind = new Binding_DAM(
-      //     description: item['description']['value'] == null
-      //         ? ""
-      //         : item['description']['value'].toString(),
-      //     name: item['name']['value'] == null
-      //         ? ""
-      //         : item['name']['value'].toString(),
-      //     image: item['image']['value'] == null
-      //         ? ""
-      //         : item['image']['value'].toString(),
-      //     video: item['video']['value'] == null
-      //         ? ""
-      //         : item['video']['value'].toString(),
-      //     sumber: item['sumber']['value'] == null
-      //         ? ""
-      //         : item['sumber']['value'].toString());
-      // return bind;
     }
     return null;
   }

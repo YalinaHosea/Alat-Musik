@@ -100,6 +100,21 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                                 style: kTitleTextStyle.copyWith(
                                     color: Colors.black38),
                               ),
+                              SizedBox(height: 10),
+                              Text(
+                                "Daerah : ",
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                              Text(
+                                snapshot.data.daerah,
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                              for (var bahan in snapshot.data.bahan)
+                                Text(bahan),
+                              for (var kegunaan in snapshot.data.kegunaan)
+                                Text(kegunaan),
                               Container(
                                   margin: EdgeInsets.symmetric(vertical: 10),
                                   height: 50,
