@@ -56,6 +56,10 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                       .getListDetailAlatMusik(widget.alatmusik.name),
                   builder: (context, AsyncSnapshot<Binding_DAM> snapshot) {
                     print(snapshot.data);
+                    var list_bahan = snapshot.data.bahan;
+                    var list_kegunaan = snapshot.data.kegunaan;
+                    print(list_kegunaan);
+
                     if (snapshot.data == null) {
                       return (Container(
                         child: Center(
@@ -96,12 +100,6 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                               ),
                               SizedBox(height: 10),
                               Text(
-                                "Video ",
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
-                              ),
-                              SizedBox(height: 10),
-                              Text(
                                 "Daerah : ",
                                 style: kTitleTextStyle.copyWith(
                                     color: Colors.black38),
@@ -111,10 +109,20 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                                 style: kTitleTextStyle.copyWith(
                                     color: Colors.black38),
                               ),
-                              for (var bahan in snapshot.data.bahan)
-                                Text(bahan),
-                              for (var kegunaan in snapshot.data.kegunaan)
-                                Text(kegunaan),
+                              SizedBox(height: 10),
+                              for (var bahan in list_bahan) Text(bahan),
+                              // for (var kegunaan in list_kegunaan)
+                              //   Text(kegunaan),
+
+                              // snapshot.data.kegunaan
+                              //     .map((kegunaan) =>
+                              //         new Text(kegunaan.toString()))
+                              //     .toList(),
+                              Text(
+                                "Video ",
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
                               Container(
                                   margin: EdgeInsets.symmetric(vertical: 10),
                                   height: 50,

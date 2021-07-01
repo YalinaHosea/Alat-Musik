@@ -85,6 +85,7 @@ class ApiProvider {
       xml2json.parse(response.data);
       var jsondata = xml2json.toParker();
       var data = jsonDecode(jsondata);
+      print(data.toString());
 
       Bind_Detail det = Bind_Detail.fromJson(data['sparql']);
       Bindings bin = det.results.bindings;
@@ -93,6 +94,7 @@ class ApiProvider {
       xml2json.parse(response2.data);
       var jsondata2 = xml2json.toParker();
       var data2 = jsonDecode(jsondata2);
+      print("data 2 : " + data2.toString());
       String daerah = data2['sparql']['results']['result']['binding'][0]
               ['literal']
           .toString();
@@ -101,30 +103,43 @@ class ApiProvider {
       xml2json.parse(response3.data);
       var jsondata3 = xml2json.toParker();
       var data3 = jsonDecode(jsondata3);
+      print("data 3 : " + data3.toString());
       List<String> bahan = new List();
-      var result = data3['sparql']['results']['result'];
-      if (result.length > 1) {
-        for (var item in result) {
-          bahan.add(item['binding'][0]['literal'].toString());
+      var results = data3['sparql']['results'];
+      if (results != null) {
+        var result = results['result'];
+        if (result.length > 1) {
+          for (var item in result) {
+            bahan.add(item['binding'][0]['literal'].toString());
+          }
+        } else {
+          bahan.add(result['binding'][0]['literal'].toString());
         }
       } else {
-        bahan.add(result['binding'][0]['literal'].toString());
+        bahan.add("belum ada data");
       }
 
       //kegunaan
       xml2json.parse(response4.data);
       var jsondata4 = xml2json.toParker();
       var data4 = jsonDecode(jsondata4);
+      print("data 4 : " + data4.toString());
       List<String> kegunaan = new List();
-      var result2 = data4['sparql']['results']['result'];
-      if (result2.length > 1) {
-        for (var item in result2) {
-          kegunaan.add(item['binding'][0]['literal'].toString());
+      var results2 = data4['sparql']['results'];
+      if (results2 != null) {
+        var result2 = results2['result'];
+        if (result2.length > 1) {
+          for (var item in result2) {
+            kegunaan.add(item['binding'][0]['literal'].toString());
+          }
+        } else {
+          kegunaan.add(result2['binding'][0]['literal'].toString());
         }
       } else {
-        kegunaan.add(result2['binding'][0]['literal']['\$t'].toString());
+        kegunaan.add("belum ada data");
       }
-
+      print(bahan);
+      print(kegunaan);
       Binding_DAM dam = new Binding_DAM(
           description: bin.description.value,
           name: bin.name.value,
