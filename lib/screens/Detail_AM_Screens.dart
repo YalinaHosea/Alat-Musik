@@ -186,10 +186,10 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                                               width: 5,
                                             ),
                                             Text(
-                                              "Putar video " +
-                                                  snapshot.data.name,
+                                              "Putar video",
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                  color: Colors.white,
+                                                  fontSize: 20),
                                             )
                                           ],
                                         )),

@@ -57,7 +57,7 @@ class _FilterScreenState extends State<FilterScreen> {
                               children: <Widget>[
                                 DropdownButtonHideUnderline(
                                   child: DropdownButton(
-                                    dropdownColor: Colors.orangeAccent,
+                                    dropdownColor: Colors.white,
                                     hint: Text("Pilih " + widget.filter),
                                     items: snapshot.data.map(
                                       (value) {
@@ -152,6 +152,7 @@ class _FilterScreenState extends State<FilterScreen> {
                                           MaterialPageRoute(
                                               builder: (_) =>
                                                   Detail_alatmusik_screens(
+                                                    kategori: bin.kategori,
                                                     alatmusik: alatmusik,
                                                     url: url_gambar_alatmusik +
                                                         bin.kategori +

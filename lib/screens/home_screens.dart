@@ -258,7 +258,7 @@ class DataSearch extends SearchDelegate<String> {
           ));
         } else {
           return Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 25),
             child: (Expanded(
                 child: GridView.builder(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -290,6 +290,7 @@ class DataSearch extends SearchDelegate<String> {
                               context,
                               MaterialPageRoute(
                                   builder: (_) => Detail_alatmusik_screens(
+                                        kategori: bin.kategori,
                                         alatmusik: alatmusik,
                                         url: url_gambar_alatmusik +
                                             bin.kategori +
