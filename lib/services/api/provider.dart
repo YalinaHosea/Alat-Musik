@@ -98,7 +98,9 @@ class ApiProvider {
       String daerah = data2['sparql']['results']['result']['binding'][0]
               ['literal']
           .toString();
-
+      if (daerah == null) {
+        daerah = "belum ada data";
+      }
       //bahan
       xml2json.parse(response3.data);
       var jsondata3 = xml2json.toParker();
