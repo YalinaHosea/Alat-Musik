@@ -13,8 +13,9 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black38),
-          backgroundColor: Colors.white,
+          title: Text("Filter Kegunaan"),
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.orangeAccent,
         ),
         body: Padding(
           padding: EdgeInsets.all(20),
@@ -28,7 +29,7 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
                     child: FlatButton(
                         padding:
                             EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: Colors.white,
+                        color: Colors.orangeAccent,
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -39,7 +40,7 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
                         },
                         child: Text(
                           "Upacara",
-                          style: TextStyle(color: Colors.black26),
+                          style: TextStyle(color: Colors.black),
                         )),
                   )),
               Container(
@@ -50,7 +51,7 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
                     child: FlatButton(
                         padding:
                             EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: Colors.white,
+                        color: Colors.orangeAccent,
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -61,7 +62,7 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
                         },
                         child: Text(
                           "Hiburan",
-                          style: TextStyle(color: Colors.black26),
+                          style: TextStyle(color: Colors.black),
                         )),
                   )),
             ],

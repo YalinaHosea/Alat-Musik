@@ -1,7 +1,7 @@
+import 'package:alatmusik/screens/AboutUs.dart';
 import 'package:alatmusik/screens/Filter_Bahan.dart';
 import 'package:alatmusik/screens/Filter_Kegunaan.dart';
 import 'package:alatmusik/screens/Filter_screens.dart';
-import 'package:alatmusik/services/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -16,13 +16,15 @@ class MainDrawer extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width * 0.85,
           child: DrawerHeader(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/angklung.jpg"),
-                    fit: BoxFit.cover)),
-            child: Text("Musikku",
-                style: kHeadingxSTyle.copyWith(color: Colors.white)),
-          ),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/angklung.jpg"),
+                      fit: BoxFit.cover)),
+              child: Text("ALMUSTRA",
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white))),
         ),
       ),
       Expanded(
@@ -67,7 +69,10 @@ class MainDrawer extends StatelessWidget {
             title: Text("Kegunaan"),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => AboutUs()));
+            },
             leading: Icon(
               Icons.person_sharp,
               color: Colors.black,

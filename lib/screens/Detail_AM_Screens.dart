@@ -9,10 +9,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 class Detail_alatmusik_screens extends StatefulWidget {
   final Bindings_AlatMusik alatmusik;
+  final String kategori;
   final String url;
   // final Function function_video;
 
-  const Detail_alatmusik_screens({Key key, this.alatmusik, this.url})
+  const Detail_alatmusik_screens(
+      {Key key, this.alatmusik, this.url, this.kategori})
       : super(key: key);
 
   @override
@@ -36,29 +38,28 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black38),
-          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.orangeAccent,
         ),
         body: Padding(
             padding: EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: <Widget>[
-                //     // Text("Detail Alat Musik ", style: kHeadingxSTyle)
-                //   ],
-                // ),
-                // SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[],
+                ),
+                SizedBox(height: 10),
                 FutureBuilder(
-                  future: apiRepository
-                      .getListDetailAlatMusik(widget.alatmusik.name),
+                  future: apiRepository.getListDetailAlatMusik(
+                    widget.alatmusik.name,
+                  ),
                   builder: (context, AsyncSnapshot<Binding_DAM> snapshot) {
                     print(snapshot.data);
-                    var list_bahan = snapshot.data.bahan;
-                    var list_kegunaan = snapshot.data.kegunaan;
-                    print(list_kegunaan);
+                    // var list_bahan = snapshot.data.bahan;
+                    // var list_kegunaan = snapshot.data.kegunaan;
+                    // print(list_kegunaan);
 
                     if (snapshot.data == null) {
                       return (Container(
@@ -75,6 +76,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                             children: <Widget>[
                               Text(
                                 snapshot.data.name,
+                                textAlign: TextAlign.justify,
                                 style: kHeadingxSTyle,
                               ),
                               SizedBox(height: 10),
@@ -83,41 +85,79 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                               ),
                               SizedBox(height: 10),
                               Text(
+                                "Kategori : ",
+                                textAlign: TextAlign.justify,
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                              Text(
+                                widget.kategori,
+                                textAlign: TextAlign.justify,
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
                                 snapshot.data.description,
+                                textAlign: TextAlign.justify,
                                 style: kTitleTextStyle.copyWith(
                                     color: Colors.black38),
                               ),
                               SizedBox(height: 10),
                               Text(
                                 "Sumber : ",
+                                textAlign: TextAlign.justify,
                                 style: kTitleTextStyle.copyWith(
                                     color: Colors.black38),
                               ),
                               Text(
                                 snapshot.data.sumber,
+                                textAlign: TextAlign.justify,
                                 style: kTitleTextStyle.copyWith(
                                     color: Colors.black38),
                               ),
                               SizedBox(height: 10),
                               Text(
                                 "Daerah : ",
+                                textAlign: TextAlign.justify,
                                 style: kTitleTextStyle.copyWith(
                                     color: Colors.black38),
                               ),
                               Text(
                                 snapshot.data.daerah,
+                                textAlign: TextAlign.justify,
                                 style: kTitleTextStyle.copyWith(
                                     color: Colors.black38),
                               ),
                               SizedBox(height: 10),
-                              for (var bahan in list_bahan) Text(bahan),
-                              // for (var kegunaan in list_kegunaan)
-                              //   Text(kegunaan),
-
-                              // snapshot.data.kegunaan
-                              //     .map((kegunaan) =>
-                              //         new Text(kegunaan.toString()))
-                              //     .toList(),
+                              Text(
+                                "Bahan : ",
+                                textAlign: TextAlign.justify,
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                              for (var bahan in snapshot.data.bahan)
+                                Text(
+                                  bahan,
+                                  textAlign: TextAlign.justify,
+                                  style: kTitleTextStyle.copyWith(
+                                      color: Colors.black38),
+                                ),
+                              SizedBox(height: 10),
+                              Text(
+                                "Kegunaan : ",
+                                textAlign: TextAlign.justify,
+                                style: kTitleTextStyle.copyWith(
+                                    color: Colors.black38),
+                              ),
+                              for (var kegunaan in snapshot.data.kegunaan)
+                                Text(
+                                  kegunaan,
+                                  textAlign: TextAlign.justify,
+                                  style: kTitleTextStyle.copyWith(
+                                      color: Colors.black38),
+                                ),
+                              SizedBox(height: 10),
                               Text(
                                 "Video ",
                                 style: kTitleTextStyle.copyWith(

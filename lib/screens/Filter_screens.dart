@@ -1,13 +1,10 @@
 import 'package:alatmusik/models/Binding_AlatMusik.dart';
-import 'package:alatmusik/models/Binding_Daerah.dart';
 import 'package:alatmusik/models/Search_Result.dart';
 import 'package:alatmusik/screens/Detail_AM_Screens.dart';
-
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class FilterScreen extends StatefulWidget {
   final String filter;
@@ -32,10 +29,9 @@ class _FilterScreenState extends State<FilterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Filter " + widget.filter),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-      ),
+          title: Text("Filter " + widget.filter),
+          centerTitle: true,
+          backgroundColor: Colors.orangeAccent),
       body: Padding(
           padding: EdgeInsets.only(left: 20, right: 20, top: 25),
           child: Column(
@@ -61,6 +57,7 @@ class _FilterScreenState extends State<FilterScreen> {
                               children: <Widget>[
                                 DropdownButtonHideUnderline(
                                   child: DropdownButton(
+                                    dropdownColor: Colors.orangeAccent,
                                     hint: Text("Pilih " + widget.filter),
                                     items: snapshot.data.map(
                                       (value) {

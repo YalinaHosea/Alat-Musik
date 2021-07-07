@@ -49,9 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black38),
-          backgroundColor: Colors.white,
-          title: Text("Cari Alat Musik"),
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.orangeAccent,
+          // title: Text("Cari Alat Musik"),
           actions: <Widget>[
             IconButton(
                 icon: Icon(Icons.search),
@@ -78,7 +78,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text("Almustra Indonesia", style: kHeadingxSTyle),
+                    Text(
+                      ' Alat Musik Tradisional Indonesia',
+                      style:
+                          TextStyle(fontSize: 20, color: Colors.orangeAccent),
+                    ),
                   ],
                 ),
                 SizedBox(height: 15),
@@ -210,25 +214,9 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  final alatmusik = [
-    "Aramba",
-    "Tifa",
-    "Bonang",
-    "Seruling",
-    "Sasando",
-    "Gendang",
-    "Tehyan"
-  ];
+  final alatmusik = [];
 
-  final recentAlatMusik = [
-    "Aramba",
-    "Tifa",
-    "Bonang",
-    "Seruling",
-    "Sasando",
-    "Gendang",
-    "Tehyan"
-  ];
+  final recentAlatMusik = [];
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -257,6 +245,7 @@ class DataSearch extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     ApiRepository apiRepository = new ApiRepository();
     // show some results based on the selection
+
     return FutureBuilder(
       future: apiRepository.getListPostSearching(query),
       builder: (context, AsyncSnapshot<List<Search_Result>> snapshot) {
@@ -269,7 +258,7 @@ class DataSearch extends SearchDelegate<String> {
           ));
         } else {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: (Expanded(
                 child: GridView.builder(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -366,7 +355,7 @@ class DataSearch extends SearchDelegate<String> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Container(
-                            width: 100,
+                            width: 120,
                             child: Text(
                               bin.nama,
                               style:
@@ -398,7 +387,7 @@ class DataSearch extends SearchDelegate<String> {
         onTap: () {
           showResults(context);
         },
-        leading: Icon(Icons.music_note),
+        // leading: Icon(Icons.music_note),
         title: RichText(
           text: TextSpan(
             text: suggestionList[index].substring(0, query.length),

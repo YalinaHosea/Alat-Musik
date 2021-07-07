@@ -6,7 +6,6 @@ import 'package:alatmusik/services/constants/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AlatMusikScreens extends StatefulWidget {
@@ -29,8 +28,8 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black38),
-          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.orangeAccent,
         ),
         body: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 25),
@@ -91,6 +90,8 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
                                         MaterialPageRoute(
                                             builder: (_) =>
                                                 Detail_alatmusik_screens(
+                                                  kategori: widget.category
+                                                      .getCategory(),
                                                   alatmusik: bin,
                                                   url: url_gambar_alatmusik +
                                                       widget.category.category +

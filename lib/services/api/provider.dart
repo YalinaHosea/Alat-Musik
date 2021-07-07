@@ -116,7 +116,7 @@ class ApiProvider {
           bahan.add(result['binding'][0]['literal'].toString());
         }
       } else {
-        bahan.add("belum ada data");
+        bahan.add("Belum ada data");
       }
 
       //kegunaan
@@ -147,7 +147,8 @@ class ApiProvider {
           video: bin.video.value,
           sumber: bin.sumber.value,
           daerah: daerah,
-          bahan: bahan);
+          bahan: bahan,
+          kegunaan: kegunaan);
 
       return dam;
     }
