@@ -3,6 +3,7 @@ import 'package:alatmusik/models/Bindings_Category.dart';
 import 'package:alatmusik/screens/Detail_AM_Screens.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
+import 'package:alatmusik/services/responsive.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
           backgroundColor: Colors.orangeAccent,
         ),
         body: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 25),
+            padding: EdgeInsets.only(left: 20, right: 20, top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -155,17 +156,17 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
                               ),
                               Positioned(
                                 //hanya bisa ada di anak nya stack
-                                bottom: 15,
-                                left: 15,
+                                bottom: screenWidth(context, dividedBy: 20),
+                                left: screenWidth(context, dividedBy: 20),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Container(
-                                      width: 120,
+                                      width: screenWidth(context, dividedBy: 3),
                                       child: Text(
                                         bin.getName(),
                                         style: kTitleTextStyle.copyWith(
-                                            color: Colors.white),
+                                            color: Colors.white, fontSize: 15),
                                       ),
                                     ),
                                   ],

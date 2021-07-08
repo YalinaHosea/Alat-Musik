@@ -42,7 +42,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
           backgroundColor: Colors.orangeAccent,
         ),
         body: Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.only(left: 20, right: 20, top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

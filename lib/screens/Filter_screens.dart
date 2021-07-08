@@ -3,6 +3,7 @@ import 'package:alatmusik/models/Search_Result.dart';
 import 'package:alatmusik/screens/Detail_AM_Screens.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
+import 'package:alatmusik/services/responsive.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -218,16 +219,21 @@ class _FilterScreenState extends State<FilterScreen> {
                                 ),
                                 Positioned(
                                   //hanya bisa ada di anak nya stack
-                                  bottom: 15,
-                                  left: 15,
+                                  bottom: screenWidth(context, dividedBy: 20),
+                                  left: screenWidth(context, dividedBy: 20),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Text(
-                                        bin.nama,
-                                        style: kTitleTextStyle.copyWith(
-                                            color: Colors.white),
+                                      Container(
+                                        width:
+                                            screenWidth(context, dividedBy: 3),
+                                        child: Text(
+                                          bin.nama,
+                                          style: kTitleTextStyle.copyWith(
+                                              color: Colors.white,
+                                              fontSize: 15),
+                                        ),
                                       ),
                                     ],
                                   ),

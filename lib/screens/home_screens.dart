@@ -189,8 +189,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Positioned(
                                 //hanya bisa ada di anak nya stack
-                                bottom: 15,
-                                left: 15,
+                                bottom: screenWidth(context, dividedBy: 20),
+                                left: screenWidth(context, dividedBy: 20),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
@@ -361,8 +361,8 @@ class DataSearch extends SearchDelegate<String> {
                             // width: double.infinity,
                             child: Text(
                               bin.nama,
-                              style:
-                                  kTitleTextStyle.copyWith(color: Colors.white),
+                              style: kTitleTextStyle.copyWith(
+                                  color: Colors.white, fontSize: 15),
                             ),
                           ),
                         ],
