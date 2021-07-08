@@ -56,7 +56,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                     widget.alatmusik.name,
                   ),
                   builder: (context, AsyncSnapshot<Binding_DAM> snapshot) {
-                    print(snapshot.data);
+                    // print(snapshot.data);
                     // var list_bahan = snapshot.data.bahan;
                     // var list_kegunaan = snapshot.data.kegunaan;
                     // print(list_kegunaan);
@@ -87,81 +87,81 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                               Text(
                                 "Kategori : ",
                                 textAlign: TextAlign.justify,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
                               ),
                               Text(
                                 widget.kategori,
                                 textAlign: TextAlign.justify,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
                               ),
                               SizedBox(height: 10),
                               Text(
                                 snapshot.data.description,
                                 textAlign: TextAlign.justify,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
                               ),
                               SizedBox(height: 10),
                               Text(
                                 "Sumber : ",
                                 textAlign: TextAlign.justify,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
                               ),
                               Text(
                                 snapshot.data.sumber,
                                 textAlign: TextAlign.justify,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
                               ),
                               SizedBox(height: 10),
                               Text(
                                 "Daerah : ",
                                 textAlign: TextAlign.justify,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
                               ),
                               Text(
                                 snapshot.data.daerah,
                                 textAlign: TextAlign.justify,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
                               ),
                               SizedBox(height: 10),
                               Text(
                                 "Bahan : ",
                                 textAlign: TextAlign.justify,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
                               ),
                               for (var bahan in snapshot.data.bahan)
                                 Text(
                                   bahan,
                                   textAlign: TextAlign.justify,
-                                  style: kTitleTextStyle.copyWith(
-                                      color: Colors.black38),
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.black87),
                                 ),
                               SizedBox(height: 10),
                               Text(
                                 "Kegunaan : ",
                                 textAlign: TextAlign.justify,
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
                               ),
                               for (var kegunaan in snapshot.data.kegunaan)
                                 Text(
                                   kegunaan,
                                   textAlign: TextAlign.justify,
-                                  style: kTitleTextStyle.copyWith(
-                                      color: Colors.black38),
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.black87),
                                 ),
                               SizedBox(height: 10),
                               Text(
                                 "Video ",
-                                style: kTitleTextStyle.copyWith(
-                                    color: Colors.black38),
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
                               ),
                               Container(
                                   margin: EdgeInsets.symmetric(vertical: 10),
