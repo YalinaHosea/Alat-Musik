@@ -15,7 +15,7 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
         appBar: AppBar(
           title: Text("Filter Kegunaan"),
           iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Colors.orangeAccent,
+          backgroundColor: Colors.amber[200],
         ),
         body: Padding(
           padding: EdgeInsets.all(20),
@@ -29,7 +29,7 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
                     child: FlatButton(
                         padding:
                             EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: Colors.orangeAccent,
+                        color: Colors.amber[200],
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -51,7 +51,7 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
                     child: FlatButton(
                         padding:
                             EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: Colors.orangeAccent,
+                        color: Colors.amber[200],
                         onPressed: () {
                           Navigator.push(
                               context,

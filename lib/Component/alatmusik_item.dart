@@ -75,14 +75,18 @@ class AlatMusikItem extends StatelessWidget {
         ),
         Positioned(
           //hanya bisa ada di anak nya stack
-          bottom: screenWidth(context, dividedBy: 20),
+          bottom: screenWidth(context, dividedBy: 18),
           left: screenWidth(context, dividedBy: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                text,
-                style: kTitleTextStyle.copyWith(color: Colors.white),
+              Container(
+                width: screenWidth(context, dividedBy: 3),
+                child: Text(
+                  text,
+                  style: kTitleTextStyle.copyWith(
+                      color: Colors.white, fontSize: 18),
+                ),
               ),
             ],
           ),

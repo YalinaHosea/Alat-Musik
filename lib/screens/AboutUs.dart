@@ -14,7 +14,7 @@ class _AboutUsState extends State<AboutUs> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Colors.amber[200],
       ),
       body: ListView(
         children: <Widget>[

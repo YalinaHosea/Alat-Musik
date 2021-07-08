@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Colors.orangeAccent,
+          backgroundColor: Colors.amber[200],
           // title: Text("Cari Alat Musik"),
           actions: <Widget>[
             IconButton(
@@ -82,8 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: <Widget>[
                     Text(
                       ' Alat Musik Tradisional Indonesia',
-                      style:
-                          TextStyle(fontSize: 20, color: Colors.orangeAccent),
+                      style: TextStyle(fontSize: 20, color: Colors.amber[200]),
                     ),
                   ],
                 ),

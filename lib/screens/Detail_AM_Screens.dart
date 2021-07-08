@@ -39,7 +39,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Colors.orangeAccent,
+          backgroundColor: Colors.amber[200],
         ),
         body: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -94,14 +94,20 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                                 widget.kategori,
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.black87),
+                                    fontSize: 15, color: Colors.black54),
                               ),
                               SizedBox(height: 10),
+                              Text(
+                                "Deskripsi : ",
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.black87),
+                              ),
                               Text(
                                 snapshot.data.description,
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.black87),
+                                    fontSize: 15, color: Colors.black54),
                               ),
                               SizedBox(height: 10),
                               Text(
@@ -114,7 +120,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                                 snapshot.data.sumber,
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.black87),
+                                    fontSize: 15, color: Colors.black54),
                               ),
                               SizedBox(height: 10),
                               Text(
@@ -127,7 +133,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                                 snapshot.data.daerah,
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.black87),
+                                    fontSize: 15, color: Colors.black54),
                               ),
                               SizedBox(height: 10),
                               Text(
@@ -141,7 +147,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                                   bahan,
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
-                                      fontSize: 15, color: Colors.black87),
+                                      fontSize: 15, color: Colors.black54),
                                 ),
                               SizedBox(height: 10),
                               Text(
@@ -155,7 +161,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                                   kegunaan,
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
-                                      fontSize: 15, color: Colors.black87),
+                                      fontSize: 15, color: Colors.black54),
                                 ),
                               SizedBox(height: 10),
                               Text(
