@@ -15,7 +15,7 @@ class _FilterBahanScreenState extends State<FilterBahanScreen> {
         appBar: AppBar(
           title: Text("Filter Bahan"),
           centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: Colors.blue[200],
         ),
         body: Padding(
@@ -41,7 +41,8 @@ class _FilterBahanScreenState extends State<FilterBahanScreen> {
                         },
                         child: Text(
                           "Logam",
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         )),
                   )),
               Container(
@@ -63,7 +64,8 @@ class _FilterBahanScreenState extends State<FilterBahanScreen> {
                         },
                         child: Text(
                           "Non Logam",
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         )),
                   )),
             ],

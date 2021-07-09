@@ -38,7 +38,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: Colors.blue[200],
         ),
         body: Padding(

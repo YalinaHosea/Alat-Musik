@@ -15,7 +15,7 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
         appBar: AppBar(
           title: Text("Filter Kegunaan"),
           centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: Colors.blue[200],
         ),
         body: Padding(
@@ -41,7 +41,8 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
                         },
                         child: Text(
                           "Upacara",
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         )),
                   )),
               Container(
@@ -63,7 +64,8 @@ class _FIlterKegunaanScreenState extends State<FIlterKegunaanScreen> {
                         },
                         child: Text(
                           "Hiburan",
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         )),
                   )),
             ],
