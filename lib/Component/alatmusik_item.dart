@@ -75,7 +75,7 @@ class AlatMusikItem extends StatelessWidget {
         ),
         Positioned(
           //hanya bisa ada di anak nya stack
-          bottom: screenWidth(context, dividedBy: 18),
+          bottom: screenWidth(context, dividedBy: 13),
           left: screenWidth(context, dividedBy: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

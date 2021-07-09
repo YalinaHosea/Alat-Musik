@@ -33,7 +33,7 @@ class _FilterScreenState extends State<FilterScreen> {
       appBar: AppBar(
           title: Text("Filter " + widget.filter),
           centerTitle: true,
-          backgroundColor: Colors.amber[200]),
+          backgroundColor: Colors.blue[200]),
       body: Padding(
           padding: EdgeInsets.only(left: 20, right: 20, top: 25),
           child: Column(

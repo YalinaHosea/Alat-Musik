@@ -39,7 +39,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Colors.amber[200],
+          backgroundColor: Colors.blue[200],
         ),
         body: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10),

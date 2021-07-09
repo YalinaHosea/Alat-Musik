@@ -6,8 +6,6 @@ import 'package:alatmusik/screens/AlatMusik_Screens.dart';
 import 'package:alatmusik/screens/Detail_AM_Screens.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
-import 'package:alatmusik/services/responsive.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'maindrawer.dart';
@@ -52,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Colors.amber[200],
+          backgroundColor: Colors.blue[200],
           // title: Text("Cari Alat Musik"),
           actions: <Widget>[
             IconButton(
@@ -81,8 +79,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      ' Alat Musik Tradisional Indonesia',
-                      style: TextStyle(fontSize: 20, color: Colors.amber[200]),
+                      ' AlMusTra',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.justify,
                     ),
                   ],
                 ),
