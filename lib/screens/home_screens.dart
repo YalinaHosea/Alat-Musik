@@ -34,23 +34,23 @@ class _HomeScreenState extends State<HomeScreen> {
   SharedPreferences sharedPreferences;
   ApiRepository apiRepository = new ApiRepository();
 
-  @override
-  void initState() {
-    super.initState();
-    setState(() {});
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   setState(() {});
+  // }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: Colors.blue[200],
+          backgroundColor: Colors.red[300],
           // title: Text("Cari Alat Musik"),
           actions: <Widget>[
             IconButton(

@@ -4,8 +4,6 @@ import 'package:alatmusik/models/Search_Result.dart';
 import 'package:alatmusik/screens/Detail_AM_Screens.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
-import 'package:alatmusik/services/responsive.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class FilterScreen extends StatefulWidget {
@@ -20,11 +18,11 @@ class _FilterScreenState extends State<FilterScreen> {
   ApiRepository apiRepository = new ApiRepository();
   Future<List<Search_Result>> list_alatmusik;
 
-  Future<List<Search_Result>> get_alatmusik(selected) async {
-    Future<List<Search_Result>> data;
-    data = apiRepository.getListPostSearching(selected);
-    return data;
-  }
+  // // Future<List<Search_Result>> get_alatmusik(selected) async {
+  // //   Future<List<Search_Result>> data;
+  // //   data = apiRepository.getListPostSearching(selected);
+  // //   return data;
+  // }
 
   String selected;
   @override
@@ -33,13 +31,13 @@ class _FilterScreenState extends State<FilterScreen> {
       appBar: AppBar(
           title: Text("Filter " + widget.filter),
           centerTitle: true,
-          backgroundColor: Colors.blue[200]),
+          backgroundColor: Colors.red[300]),
       body: Padding(
           padding: EdgeInsets.only(left: 20, right: 20, top: 25),
           child: Column(
             children: <Widget>[
               FutureBuilder(
-                  future: apiRepository.getListDaerah(widget.filter),
+                  future: apiRepository.getListFilter(widget.filter),
                   builder: (context, AsyncSnapshot<List<String>> snapshot) {
                     print(snapshot.data);
                     if (snapshot.data == null) {

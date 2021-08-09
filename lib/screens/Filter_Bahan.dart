@@ -16,7 +16,7 @@ class _FilterBahanScreenState extends State<FilterBahanScreen> {
           title: Text("Filter Bahan"),
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: Colors.blue[200],
+          backgroundColor: Colors.red[300],
         ),
         body: Padding(
           padding: EdgeInsets.all(20),
@@ -30,7 +30,7 @@ class _FilterBahanScreenState extends State<FilterBahanScreen> {
                     child: FlatButton(
                         padding:
                             EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: Colors.blue[200],
+                        color: Colors.red[300],
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -53,7 +53,7 @@ class _FilterBahanScreenState extends State<FilterBahanScreen> {
                     child: FlatButton(
                         padding:
                             EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: Colors.blue[200],
+                        color: Colors.red[300],
                         onPressed: () {
                           Navigator.push(
                               context,

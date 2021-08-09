@@ -1,4 +1,3 @@
-import 'package:alatmusik/services/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class AboutUs extends StatefulWidget {
@@ -14,7 +13,7 @@ class _AboutUsState extends State<AboutUs> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Colors.blue[200],
+        backgroundColor: Colors.red[300],
       ),
       body: ListView(
         children: <Widget>[

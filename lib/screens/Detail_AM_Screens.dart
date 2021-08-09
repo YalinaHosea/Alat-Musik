@@ -1,5 +1,6 @@
 import 'package:alatmusik/models/Binding_AlatMusik.dart';
 import 'package:alatmusik/models/Binding_DAM.dart';
+import 'package:alatmusik/models/Daerah.dart';
 import 'package:alatmusik/services/api/repository.dart';
 import 'package:alatmusik/services/constants/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -31,7 +32,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
       await launch(url);
     } else {
       throw 'Could not launch $url';
-    }
+    } //buka url
   }
 
   @override
@@ -39,7 +40,7 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: Colors.blue[200],
+          backgroundColor: Colors.red[300],
         ),
         body: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -129,12 +130,13 @@ class _Detail_alatmusik_screensState extends State<Detail_alatmusik_screens> {
                                 style: TextStyle(
                                     fontSize: 15, color: Colors.black87),
                               ),
-                              Text(
-                                snapshot.data.daerah,
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.black54),
-                              ),
+                              for (var daerah in snapshot.data.daerah)
+                                Text(
+                                  daerah,
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.black54),
+                                ),
                               SizedBox(height: 10),
                               Text(
                                 "Bahan : ",

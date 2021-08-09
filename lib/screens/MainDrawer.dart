@@ -1,4 +1,5 @@
 import 'package:alatmusik/screens/AboutUs.dart';
+import 'package:alatmusik/screens/Daerah.dart';
 import 'package:alatmusik/screens/Filter_Bahan.dart';
 import 'package:alatmusik/screens/Filter_Kegunaan.dart';
 import 'package:alatmusik/screens/Filter_screens.dart';
@@ -67,6 +68,17 @@ class MainDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             title: Text("Kegunaan"),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => Daerah()));
+            },
+            leading: Icon(
+              Icons.multitrack_audio,
+              color: Colors.black,
+            ),
+            title: Text("Daerah2"),
           ),
           ListTile(
             onTap: () {

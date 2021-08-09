@@ -6,7 +6,7 @@ class Binding_DAM {
   String image;
   String video;
   String sumber;
-  String daerah;
+  List<String> daerah;
   List<String> bahan;
   List<String> kegunaan;
 

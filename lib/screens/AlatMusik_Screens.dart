@@ -29,7 +29,7 @@ class _AlatMusikScreensState extends State<AlatMusikScreens> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: Colors.blue[200],
+          backgroundColor: Colors.red[300],
         ),
         body: Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10),

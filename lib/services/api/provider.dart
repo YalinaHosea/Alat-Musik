@@ -72,10 +72,12 @@ class ApiProvider {
     print("response 2 : " + response2.statusCode.toString());
     Response response4 = await dio
         .get(url_detail_kegunaan1 + nama_alatmusik + url_detail_kegunaan2);
+    print("response 4 : " + response4.statusCode.toString());
     // print(url_detail_kegunaan1);
     Response response3 =
         await dio.get(url_detail_bahan1 + nama_alatmusik + url_detail_bahan2);
-    print(url_detail_bahan1);
+    print("response 3 : " + response3.statusCode.toString());
+    // print(url_detail_bahan1);
 
     if (response.statusCode == 200 &&
         response2.statusCode == 200 &&
@@ -95,12 +97,32 @@ class ApiProvider {
       var jsondata2 = xml2json.toParker();
       var data2 = jsonDecode(jsondata2);
       print("data 2 : " + data2.toString());
-      String daerah = data2['sparql']['results']['result']['binding'][0]
-              ['literal']
-          .toString();
-      if (daerah == null) {
-        daerah = "belum ada data";
+      List<String> daerah = new List();
+      var results3 = data2['sparql']['results'];
+      if (results3 != null) {
+        var result3 = results3['result'];
+        if (result3.length > 1) {
+          for (var item in result3) {
+            if (item['binding'].length > 1) {
+              daerah.add(item['binding'][0]['literal'].toString());
+            } else {
+              daerah.add(item['binding']['literal'].toString());
+            }
+          }
+        } else {
+          daerah.add(result3['binding'][0]['literal'].toString());
+        }
+      } else {
+        daerah.add("Belum ada data");
       }
+      // String daerah = data2['sparql']['results']['result']['binding'][0]
+      //         ['literal']
+      //     .toString();
+
+      // if (daerah == null) {
+      //   daerah = "belum ada data";
+      // }
+
       //bahan
       xml2json.parse(response3.data);
       var jsondata3 = xml2json.toParker();
@@ -112,7 +134,11 @@ class ApiProvider {
         var result = results['result'];
         if (result.length > 1) {
           for (var item in result) {
-            bahan.add(item['binding'][0]['literal'].toString());
+            if (item['binding'].length > 1) {
+              bahan.add(item['binding'][0]['literal'].toString());
+            } else {
+              bahan.add(item['binding']['literal'].toString());
+            }
           }
         } else {
           bahan.add(result['binding'][0]['literal'].toString());
@@ -132,7 +158,11 @@ class ApiProvider {
         var result2 = results2['result'];
         if (result2.length > 1) {
           for (var item in result2) {
-            kegunaan.add(item['binding'][0]['literal'].toString());
+            if (item['binding'].length > 1) {
+              kegunaan.add(item['binding'][0]['literal'].toString());
+            } else {
+              kegunaan.add(item['binding'][0]['literal'].toString());
+            }
           }
         } else {
           kegunaan.add(result2['binding'][0]['literal'].toString());
@@ -140,6 +170,7 @@ class ApiProvider {
       } else {
         kegunaan.add("belum ada data");
       }
+
       print(bahan);
       print(kegunaan);
       Binding_DAM dam = new Binding_DAM(
@@ -151,7 +182,7 @@ class ApiProvider {
           daerah: daerah,
           bahan: bahan,
           kegunaan: kegunaan);
-
+// ngirim ke screens
       return dam;
     }
     return null;
@@ -198,7 +229,7 @@ class ApiProvider {
     }
   }
 
-  Future<List<String>> getDaerah(filter) async {
+  Future<List<String>> getFilter(filter) async {
     var url;
     if (filter == "Daerah") {
       url = url_daerah;
